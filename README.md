@@ -3,6 +3,22 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+## Reflections
+
+In this project, I used a PID controller to control the steering angle. The proportional, integral and derivative hyperparameters were 0.1981,0,2.82164 which is tuned by twiddle algorithm.
+
+* the P error term is propotional to cross track error. In this project, it is the main part of the controller. Incresing the weight Kp will make the car follow the sharp turns better. But when it is too large, it will overshoot the target trajectory and make the car oscillate.
+
+* the I error term is the sum of error over time and accumuated offset that should be corrected. It can fix the steering drift of the car. In this project, the weight Ki is 0.
+
+* thd D error term is the difference between two cte. It can reduce the overshoot by the P error term and make the car more stable.
+
+I used the standard twiddle algorithm to tune the hyperparameters. 
+
+1. set the initial weight to 1, 0, 0
+2. set the parameters of the twiddle algorithm tolerance to 0.05, and dp to 1,1,1, and at most 4000 steps for calculate the twiddle error.
+3. apply the algorithm and wait for converge. It need about 4 hours on my laptop.
+
 ## Dependencies
 
 * cmake >= 3.5
